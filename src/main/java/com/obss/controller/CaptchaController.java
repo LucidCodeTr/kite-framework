@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.image.ImageCaptchaService;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 @SuppressWarnings("restriction")
 @Controller
@@ -55,10 +53,7 @@ public class CaptchaController {
 			BufferedImage challenge = captchaService.getImageChallengeForID(
 					captchaId, request.getLocale());
 
-			// a jpeg encoder
-			JPEGImageEncoder jpegEncoder = JPEGCodec
-					.createJPEGEncoder(jpegOutputStream);
-			jpegEncoder.encode(challenge);
+			javax.imageio.ImageIO.write(challenge, "JPEG", jpegOutputStream);
 		} catch (IllegalArgumentException e) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
