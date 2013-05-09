@@ -11,10 +11,10 @@ public class HibernateConfiguration {
 	public static ServiceRegistry hibernateConfig() {
 		Properties properties = new Properties();
 		properties.setProperty(Environment.DIALECT,"org.hibernate.dialect.MySQLDialect");
-		properties.setProperty(Environment.URL, "jdbc:mysql://eu-cdbr-west-01.cleardb.com/heroku_02abd271793ebb2?reconnect=true");
+		properties.setProperty(Environment.URL, "jdbc:mysql://us-cdbr-east-03.cleardb.com/heroku_f89f3481d9cb626?reconnect=true");
 		properties.setProperty(Environment.DRIVER, "com.mysql.jdbc.Driver");
-		properties.setProperty(Environment.USER, "b3465c25012c00");
-		properties.setProperty(Environment.PASS, "09688597");
+		properties.setProperty(Environment.USER, "b4d1de09400aed");
+		properties.setProperty(Environment.PASS, "a1135ae7");
 
 		ServiceRegistryBuilder serviceRegistryBuilder = new ServiceRegistryBuilder();
 		serviceRegistryBuilder.applySettings(properties);
