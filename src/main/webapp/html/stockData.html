@@ -11,43 +11,8 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Demo App</h1>
+		<h1>Gedik Stock Data</h1>
 		<div id="grid"></div>
-		<fieldset>
-			<legend>Gedik Stocks</legend>
-			<div id="account-template-area">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>   <label>StockName</label>  
-							</th>
-							<th>   <label>StockPrice</label>  
-							</th>
-							<th>   <label>Volume</label>  
-							</th>
-							<th>   <label>HighestPrice</label>  
-							</th>
-							<th>   <label>LowestPrice</label>  
-							</th>
-						</tr>
-					</thead>
-					<tbody id="account-table-body"></tbody>
-					<script id="account-table-body-template" type="text/template"">
-						 {{#gedikStockList}}
-						<tr>
-							 
-							<td id="username">   {{stockName}}  </td>  
-							<td>   {{stockPrice}}  </td>  
-							<td>   {{volume}}  </td>
-							<td>   {{highestPrice}}  </td>
-							<td>   {{lowestPrice}}  </td>
-
-						</tr>
-						 {{/gedikStockList}}
-					</script>
-				</table>
-			</div>
-		</fieldset>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery.validate.min.js"></script>
