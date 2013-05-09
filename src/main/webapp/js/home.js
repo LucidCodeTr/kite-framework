@@ -212,7 +212,7 @@ main.modalAdd = {
 	},
 	reloadCaptchaImage : function() {
 		var upper = this;
-		main.modalAdd.dom.captchaImage.attr("src", "/spring-mvc-demo/captcha/getImage");
+		main.modalAdd.dom.captchaImage.attr("src", "/stock-analyzer/captcha/getImage");
 	},
 };
 
