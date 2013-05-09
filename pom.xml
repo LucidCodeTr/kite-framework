@@ -208,7 +208,7 @@
 	<!-- Build Configuration | | Use "jetty:stop jetty:run" to start the server. 
 		| -->
 	<build>
-		<finalName>spring-mvc-demo</finalName>
+		<finalName>stock-analyzer</finalName>
 		
 		<plugins>
 
