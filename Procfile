@@ -1,1 +1,1 @@
-web : java -XDignore.symbol.file -jar target/dependency/jetty-runner.jar target/*.war
+web : java -jar target/dependency/jetty-runner.jar target/*.war
