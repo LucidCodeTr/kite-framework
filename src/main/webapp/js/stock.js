@@ -18,7 +18,6 @@ main.listView = {
 	init : function() {
 		var upper = this;
 		this.dom.core = $("#account-template-area");
-		//upper.fill();
 		upper.fillKendoGrid();
 	},
 	fill : function() {
@@ -73,13 +72,28 @@ main.listView = {
                     field: "highestPrice",
                     title: "Highest Price",
                     width: 150
-                }
-            ]
+                },
+                { command: { text: "Buy", click: showDetails }, title: "&nbsp;", title: "Command", width: "52px" }
+            ],
+            editable: "popup"
         });
 	}
 };
 
 $(function() {
 	main.init();
+	
+	var win = $("#window").kendoWindow({
+        height: "200px",
+        title: "Centered Window",
+        visible: false,
+        width: "200px"
+    }).data("kendoWindow");
         
 });
+
+function showDetails (){
+    var win = $("#window").data("kendoWindow");
+    win.center();
+    win.open();
+};
