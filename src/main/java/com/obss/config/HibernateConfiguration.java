@@ -26,10 +26,10 @@ public class HibernateConfiguration {
 		ServiceRegistryBuilder serviceRegistryBuilder = new ServiceRegistryBuilder();
 		
 		//heroku
-		serviceRegistryBuilder.applySettings(herokuProperties);
+		//serviceRegistryBuilder.applySettings(herokuProperties);
 		
 		//local
-		//serviceRegistryBuilder.applySettings(localProperties);
+		serviceRegistryBuilder.applySettings(localProperties);
 		
 		ServiceRegistry serviceRegistry = serviceRegistryBuilder.buildServiceRegistry();
 		return serviceRegistry;
