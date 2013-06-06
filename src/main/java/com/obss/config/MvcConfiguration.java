@@ -22,7 +22,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	public ViewResolver getViewResolver(ResourceLoader resourceLoader) {
 		
 		InternalResourceViewResolver InternalResolver = new InternalResourceViewResolver();
-		InternalResolver.setPrefix("/html/");
+		InternalResolver.setPrefix("/");
 		InternalResolver.setSuffix(".html");
 		InternalResolver.setCache(false);
 		InternalResolver.setContentType("text/html;charset=ISO-8859-1");

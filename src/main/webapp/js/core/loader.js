@@ -1,0 +1,55 @@
+define([ "jquery"], function($) {	
+	
+	return {
+		
+		loadView : function(module, path, callback) {
+			var that = this;
+			//div + append is used to prevent multiple calls of $.load from
+			//replacing $("#" + module.parentId) content on every call
+			$('<div>').load(path + ".html", function() {
+				$("#" + module.parentId).append($(this).html());
+				callback();
+			});		
+		},
+		loadContainer : function(module, path, htmlBuffer, callback) {
+			var that = this;
+			//div + append is used to prevent multiple calls of $.load from
+			//replacing $("#" + module.parentId) content on every call
+			$('<div>').load(path + ".html", function(data) {
+				
+				//append if ends with _end
+				//replace o.w.
+				if (path.indexOf("_end", path.length - 4) !== -1) {
+					htmlBuffer += data;
+				} else {
+					var oldHtml = $("#" + module.parentId).html();
+					htmlBuffer = data + oldHtml;
+				}			
+				callback(htmlBuffer);
+			});		
+		},
+		loadController : function (module, path, callback) {
+			var mdeps = [ path + ".js" ];
+			require(mdeps, function(obj) {
+				callback(obj);
+			});
+		},
+		loadCSS : function (givenPath) {
+		    if (givenPath != undefined) {
+				var link = document.createElement("link");
+			    link.type = "text/css";
+			    link.rel = "stylesheet";
+		    	link.href = givenPath;
+			    document.getElementsByTagName("head")[0].appendChild(link);
+		    } else {
+				for (var path in pom.cssDependencies) {
+					var link = document.createElement("link");
+				    link.type = "text/css";
+				    link.rel = "stylesheet";
+				    link.href = pom.cssDependencies[path];
+				    document.getElementsByTagName("head")[0].appendChild(link);
+				}
+		    }
+		}
+	};
+});
