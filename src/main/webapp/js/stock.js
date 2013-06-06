@@ -61,6 +61,10 @@ main.listView = {
                     title: "Stock Price",
                     width: 120
             	}, {
+                    field: "priceDiff",
+                    title: "Difference (%)",
+                    width: 120
+            	}, {
                     field: "volume",
                     title: "Volume",
                     width: 120
