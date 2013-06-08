@@ -9,7 +9,7 @@ define(["jquery", "mustache"], function(sandbox, mustache) {
 			innerHtml : null
 		},
 		template : 
-            '<div id ="{{id}}" class="span8">\n' + 
+            '<div id ="{{id}}" class="span6">\n' + 
 			'{{{innerHtml}}}\n' + 
             '</div>'
 		, 

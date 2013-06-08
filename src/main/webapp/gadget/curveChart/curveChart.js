@@ -1,4 +1,4 @@
-define(["jquery", "flot"], function(sandbox) {
+define(["jquery", "flot", "flot.resize"], function(sandbox) {
 	return {
 		init : function (id) {
 			/* Curve chart starts */

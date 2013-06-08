@@ -7,7 +7,7 @@ define([ "jquery"], function($) {
 			//div + append is used to prevent multiple calls of $.load from
 			//replacing $("#" + module.parentId) content on every call
 			$('<div>').load(path + ".html", function() {
-				$("#" + module.id).append($(this).html());
+				$("#" + module.id).replaceWith($(this).html());
 				callback();
 			});		
 		},

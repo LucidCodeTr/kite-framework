@@ -21,10 +21,10 @@ define(["jquery", "mustache"], function(sandbox, mustache) {
             '      </div>\n' + 
             '      <div class="clearfix"></div>\n' + 
             '    </div> ' + 
-			' 	 {{{ innerHtml }}}\n' + 
             '    <!-- Widget content -->\n' + 
             '    <div class="widget-content">\n' + 
             '      <div class="padd">\n' + 
+			' 	 {{{ innerHtml }}}\n' + 
             '		</div>\n' + 
 			'	 </div>\n' + 
 			'	 <!-- Widget ends -->\n' + 
