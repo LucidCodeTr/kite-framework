@@ -1,8 +1,10 @@
-define(["core/sandbox", "mustache"], function(sandbox, mustache) {
+define(["core/sandbox", "mustache"], function(Sandbox, mustache) {
 	return {
 		dom : {
 			self : null,
-			parent : null
+			parent : null,
+			minimizeButton : null,
+			closeButton : null
 		},
 		data : {
 			id : null,
@@ -16,8 +18,8 @@ define(["core/sandbox", "mustache"], function(sandbox, mustache) {
             '    <div class="widget-head">\n' + 
             '      <div class="pull-left">Dashboard</div>\n' + 
             '      <div class="widget-icons pull-right">\n' + 
-            '        <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>\n' + 
-            '        <a href="#" class="wclose"><i class="icon-remove"></i></a>\n' + 
+            '        <a id ="{{id}}-wminimize" href="#" class="wminimize"><i class="icon-chevron-up"></i></a>\n' + 
+            '        <a id ="{{id}}-wclose" href="#" class="wclose"><i class="icon-remove"></i></a>\n' + 
             '      </div>\n' + 
             '      <div class="clearfix"></div>\n' + 
             '    </div> ' + 
@@ -36,23 +38,28 @@ define(["core/sandbox", "mustache"], function(sandbox, mustache) {
     	},
 		init : function (id) {
 			
-			//set dom elements
 			this.dom.self = $("#" + id);
-			this.dom.parent = this.dom.self.parent();
 			
+			//draw widget
+			this.paint();
+			
+			//set dom elements
+			this.dom.parent = this.dom.self.parent();
+			this.dom.minimizeButton = $("#" + id + "-wminimize");
+			this.dom.closeButton = $("#" + id + "-wclose");
 			
 			//set data
 			this.data.id = id;		
 			this.data.innerHtml = this.dom.self.html();
 			this.data.color = this.dom.self.attr("data-color");
-			
-			//draw widget
-			this.paint();
 						
 			//bind events
 			this.bindEvents();
 			
-			console.log("widget executed");
+			//set instance to module registry
+			Sandbox.Core.registerContainerInstance(this);
+			
+			console.log("widget initialized");
 		},
 		destroy : function () {
 			console.log("widget destroyed");
@@ -61,31 +68,8 @@ define(["core/sandbox", "mustache"], function(sandbox, mustache) {
 			console.log("gadget add: " + e.toString());
 		},
 		bindEvents : function() {
-			
-			sandbox.setEvent({
-				type: "click",
-				parent: "#"+this.data.id,
-				child: ".wclose",
-				method: "delegate",
-				handler: {
-					context: this, 
-					method: this.closeClicked
-				},
-				moduleId: this.data.id
-			});
-			
-			sandbox.setEvent({
-				type: "click",
-				parent: "#"+this.data.id,
-				child: ".wminimize",
-				method: "delegate",
-				handler: {
-					context: this, 
-					method: this.closeClicked
-				},
-				moduleId: this.data.id
-			});
-		
+			this.dom.closeButton.click(this.closeClicked); 
+			this.dom.minimizeButton.click(this.minimizeClicked);		
 		},
 		closeClicked : function (e) {
 				e.preventDefault();

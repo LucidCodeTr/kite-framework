@@ -6,13 +6,17 @@ define(
 			// private
 			var modules = {};
 			
+		    // Listeners
+		    var listenerList = {};
+			
 			var register = function(moduleId, parentId, binding) {
 				//console.log("Registering:" + moduleID + " " + parentId);
 				modules[moduleId] = {
 					"id" : moduleId,
 					"parentId" : parentId,
 					"binding" : binding,
-					"visited" : false
+					"visited" : false,
+					"instance" : null
 				};
 			};
 			
@@ -154,6 +158,10 @@ define(
 							this.stop(moduleID);
 						}
 					}
+				},
+				
+				registerContainerInstance : function(controller) {
+					modules[controller.data.id].instance = controller;
 				},
 
 				getModuleData : function(moduleId) {
