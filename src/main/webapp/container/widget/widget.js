@@ -1,4 +1,4 @@
-define(["jquery", "mustache"], function(sandbox, mustache) {
+define(["core/sandbox", "mustache"], function(sandbox, mustache) {
 	return {
 		dom : {
 			self : null,
@@ -45,9 +45,12 @@ define(["jquery", "mustache"], function(sandbox, mustache) {
 			this.data.id = id;		
 			this.data.innerHtml = this.dom.self.html();
 			this.data.color = this.dom.self.attr("data-color");
-		
+			
 			//draw widget
 			this.paint();
+						
+			//bind events
+			this.bindEvents();
 			
 			console.log("widget executed");
 		},
@@ -56,6 +59,55 @@ define(["jquery", "mustache"], function(sandbox, mustache) {
 		},
 		addGadget : function (e) {
 			console.log("gadget add: " + e.toString());
+		},
+		bindEvents : function() {
+			
+			sandbox.setEvent({
+				type: "click",
+				parent: "#"+this.data.id,
+				child: ".wclose",
+				method: "delegate",
+				handler: {
+					context: this, 
+					method: this.closeClicked
+				},
+				moduleId: this.data.id
+			});
+			
+			sandbox.setEvent({
+				type: "click",
+				parent: "#"+this.data.id,
+				child: ".wminimize",
+				method: "delegate",
+				handler: {
+					context: this, 
+					method: this.closeClicked
+				},
+				moduleId: this.data.id
+			});
+		
+		},
+		closeClicked : function (e) {
+				e.preventDefault();
+				var $wbox = $(this).parent().parent().parent();
+				$wbox.hide(100);
+		},
+		minimizeClicked : function(e) {
+			e.preventDefault();
+			var $wcontent = $(this).parent().parent().next(
+					'.widget-content');
+			if ($wcontent.is(':visible')) {
+				$(this).children('i').removeClass(
+						'icon-chevron-up');
+				$(this).children('i').addClass(
+						'icon-chevron-down');
+			} else {
+				$(this).children('i').removeClass(
+						'icon-chevron-down');
+				$(this).children('i').addClass(
+						'icon-chevron-up');
+			}
+			$wcontent.toggle(500);
 		}
 	}
 });

@@ -52,7 +52,7 @@ define(
 			return {
 				
 				Communication : Communication,
-				Utilities : Utilities,
+				Utils : Utilities,
 				Loader : Loader,
 				
 				loadContainers : function(that, id, callback) {
