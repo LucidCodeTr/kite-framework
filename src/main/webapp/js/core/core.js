@@ -55,7 +55,7 @@ define(
 				Utilities : Utilities,
 				Loader : Loader,
 				
-				loadContainers : function(that, id, htmlBuffer, callback) {
+				loadContainers : function(that, id, callback) {
 					
 					var selector;
 					if (id) {
@@ -80,32 +80,22 @@ define(
 					//2: visit parent node
 					if (module == undefined) {						
 						module = modules[$(selector).attr("id")];
-						
-						//load start of current container
-						that.startContainer(module.id, htmlBuffer, function(id, that, htmlBuffer) {	
-							console.log("container start loading complete: " + module.id);
-							//loadGadgets(that, module.id);
-							var path = "container/" + module.binding.replace(/\./g, "/");
-							Loader.loadContainer(module.id, path + "_end", htmlBuffer, function(htmlBuffer) {
-								
-								console.log("container end loading complete: " + module.id);
 
-								Loader.loadController(module, path, function(controller) {
-								
-									console.log("Container Started:" + module.id);
-									controller.display();
-									if (module.parentId != "container") {
-										that.loadContainers(that, module.parentId, htmlBuffer, function() {
-											loadGadgets(that);
-										});
-									} else {
-										//end traversal
-										$("#" + module.parentId).html(htmlBuffer);
-										callback(that);
-									}																																						
+						var path = "container/" + module.binding.replace(/\./g, "/");
+
+						Loader.loadController(module, path, function(controller) {								
+							console.log("Container Started:" + module.id);
+							controller.init(module.id);
+							if (module.parentId != "container") {
+								that.loadContainers(that, module.parentId, function() {
+									loadGadgets(that);
 								});
-							});
+							} else {
+								//end traversal
+								callback(that);
+							}																																						
 						});
+						
 
 						
 					} else {	
@@ -115,7 +105,7 @@ define(
 						module.visited = true;		
 							
 						//2: loads nested containers	
-						that.loadContainers(that, module.id, htmlBuffer);
+						that.loadContainers(that, module.id);
 										
 					}		
 				},
@@ -134,27 +124,9 @@ define(
 						loadGadgets(this, module.id);
 					});
 					Loader.loadController(module, path, function(controller) {
-						controller.display();
+						controller.init(module.id);
 					});
 					console.log("Modue Started:" + id);
-				},
-				
-				startContainer : function(id, htmlBuffer, callback) {
-					
-					var self = this;
-					var module = modules[id];
-					
-					console.log("Starting Container:" + module.id);
-					if (!modules.hasOwnProperty(id)) {
-						throw "Module not found!";
-					}
-					
-					var path = "container/" + module.binding.replace(/\./g, "/");
-					var mdeps = [ path + ".js" ];
-					Loader.loadContainer(module, path + "_start", htmlBuffer, function(htmlBuffer) {						
-						callback(id, self, htmlBuffer);						
-					});				
-					
 				},
 
 				stop : function(moduleID) {
@@ -170,9 +142,8 @@ define(
 					}
 				},
 				startAll : function(that) {
-					var htmlBuffer = "";
 					registerAllContainers();
-					this.loadContainers(this, undefined, htmlBuffer, function(that) {
+					this.loadContainers(this, undefined, function(that) {
 						loadGadgets(that);
 					});
 					

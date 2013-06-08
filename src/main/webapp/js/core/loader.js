@@ -11,29 +11,6 @@ define([ "jquery"], function($) {
 				callback();
 			});		
 		},
-		loadContainer : function(module, path, htmlBuffer, callback) {
-			var that = this;
-			//div + append is used to prevent multiple calls of $.load from
-			//replacing $("#" + module.parentId) content on every call
-			$('<div>').load(path + ".html", function(data) {
-				
-				//append if ends with _end
-				//replace o.w.
-				if (path.indexOf("_end", path.length - 4) !== -1) {
-					htmlBuffer += data;
-				} else {
-					var oldHtml;
-					if (module.binding == "widget.widget") {
-						oldHtml = $("#" + module.id).html();
-						htmlBuffer += data + oldHtml;
-					} else {
-						oldHtml = htmlBuffer;
-						htmlBuffer = data + oldHtml;
-					}
-				}			
-				callback(htmlBuffer);
-			});		
-		},
 		loadController : function (module, path, callback) {
 			var mdeps = [ path + ".js" ];
 			require(mdeps, function(obj) {

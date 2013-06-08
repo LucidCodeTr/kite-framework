@@ -61,7 +61,8 @@ requirejs.config({
         'jquery-ui' :['jquery'],
         'bootstrap-datetimepicker' :['bootstrap'],
         'kendo.web' : ['jquery'],
-        'jquery' : []
+        'jquery' : [],
+        'mustache' : [],
         
     },
 	"baseUrl" : "js",
@@ -86,7 +87,8 @@ requirejs.config({
 		"color" : pom.repos.cloudfare + "/jquery-color/" + pom.versions.jquerycolor + "/jquery.color.min",
 		"prettyPhoto" : pom.repos.jsdelivr + "/prettyphoto/" + pom.versions.prettyphoto + "/jquery.prettyPhoto",
 		"kendo-web" : "lib/kendo.web",
-		"jquery" : "lib/offline/jquery.min"
+		"jquery" : "lib/offline/jquery.min",
+		"mustache" : "lib/offline/mustache"
 	}
 });
 

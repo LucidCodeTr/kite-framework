@@ -1,6 +1,6 @@
 define(["jquery"], function(sandbox) {
 	return {
-		display : function () {
+		init : function (id) {
 			console.log("navigation bar initialized");
 		},
 		destroy : function () {

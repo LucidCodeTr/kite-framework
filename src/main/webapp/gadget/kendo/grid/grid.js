@@ -1,6 +1,6 @@
 define(["jquery", "kendo-web"], function(sandbox) {
 	return {
-		display : function () {
+		init : function (id) {
 			$("#kendo-grid").kendoGrid({
 		        dataSource: {
 		            type: "jsonp",

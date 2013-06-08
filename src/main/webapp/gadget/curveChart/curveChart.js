@@ -1,6 +1,6 @@
 define(["jquery", "flot"], function(sandbox) {
 	return {
-		display : function () {
+		init : function (id) {
 			/* Curve chart starts */
 
 			var sin = [], cos = [];
