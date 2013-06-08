@@ -60,7 +60,8 @@ requirejs.config({
         'bootstrap' : ['jquery'],
         'jquery-ui' :['jquery'],
         'bootstrap-datetimepicker' :['bootstrap'],
-        'kendo.web' : ['jquery']
+        'kendo.web' : ['jquery'],
+        'jquery' : []
         
     },
 	"baseUrl" : "js",
@@ -69,7 +70,7 @@ requirejs.config({
 		"app" : "app",
 		"core" : "core",
 		"gadget" : "gadget",
-		"jquery" : pom.repos.google + "/jquery/" + pom.versions.jquery + "/jquery.min",
+		//"jquery" : pom.repos.google + "/jquery/" + pom.versions.jquery + "/jquery.min",
 		"jquery-ui" : pom.repos.google + "/jqueryui/" + pom.versions.jqueryui + "/jquery-ui.min",
 		"bootstrap" : pom.repos.cloudfare + "/twitter-bootstrap/" + pom.versions.bootstrap + "/js/bootstrap.min",
 		"bootstrap-datetimepicker" : pom.repos.cloudfare + "/bootstrap-datetimepicker/" + pom.versions.datetimepicker + "/js/bootstrap-datetimepicker.min", 
@@ -84,7 +85,8 @@ requirejs.config({
 		"sizzle" : pom.repos.cloudfare + "/sizzle/" + pom.versions.sizzle + "/sizzle.min",
 		"color" : pom.repos.cloudfare + "/jquery-color/" + pom.versions.jquerycolor + "/jquery.color.min",
 		"prettyPhoto" : pom.repos.jsdelivr + "/prettyphoto/" + pom.versions.prettyphoto + "/jquery.prettyPhoto",
-		"kendo-web" : "lib/kendo.web"
+		"kendo-web" : "lib/kendo.web",
+		"jquery" : "lib/offline/jquery.min"
 	}
 });
 

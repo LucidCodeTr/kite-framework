@@ -27,34 +27,39 @@
 
 <!-- Main content starts -->
 
-<div class="content">
+<div id="content">
 
   	<!-- Sidebar -->
 	<aside id="menu" data-type="gadget" data-bind="menu.menu"></aside>
     <!-- Sidebar ends -->
 
-  	<!-- Main bar -->
-	<div id="page" data-type="container" data-bind="page.page">
-		
-		<!-- Row 1 -->
-		<div id="row_1" data-type="container" data-bind="row.row">
-			<div id="span_1" data-type="container" data-bind="span.span">
-				<div id="widget_1" data-type="container" data-bind="widget.widget">
-					<aside id="barChart" data-type="gadget" data-bind="barChart.barChart"></aside>
-					<aside id="kendo" data-type="gadget" data-bind="kendo.grid.grid"></aside>
-					<!-- <aside id="curveChart" data-type="gadget" data-bind="curveChart.curveChart"></aside>-->
+	<div id="container">
+	  	<!-- Main bar -->
+		<div id="page" data-type="container" data-bind="page.page">
+			
+			<!-- Row 1 -->
+			<div id="row_1" data-type="container" data-bind="row.row">
+				<div id="span_1" data-type="container" data-bind="span.span">
+					<div id="widget_1" data-type="container" data-bind="widget.widget">
+						<aside id="barChart" data-type="gadget" data-bind="barChart.barChart"></aside>
+						<!-- <aside id="curveChart" data-type="gadget" data-bind="curveChart.curveChart"></aside>-->
+					</div>
+					<div id="widget_2" data-type="container" data-bind="widget.widget">
+						<aside id="kendo" data-type="gadget" data-bind="kendo.grid.grid"></aside>
+						<!-- <aside id="curveChart" data-type="gadget" data-bind="curveChart.curveChart"></aside>-->
+					</div>
 				</div>
 			</div>
+			<!-- Row 1 ends -->
+			
+			<!-- Row 2 -->
+			<aside id="row_2" data-type="container" data-bind="row.row">
+			
+			</aside>
+			<!-- Row 2 ends -->
 		</div>
-		<!-- Row 1 ends -->
-		
-		<!-- Row 2 -->
-		<aside id="row_2" data-type="container" data-bind="row.row">
-		
-		</aside>
-		<!-- Row 2 ends -->
-	</div>
-   <!-- Mainbar ends -->	    	
+	   <!-- Mainbar ends -->
+	  </div>	    	
    
    <div class="clearfix"></div>
 

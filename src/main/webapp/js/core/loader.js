@@ -7,7 +7,7 @@ define([ "jquery"], function($) {
 			//div + append is used to prevent multiple calls of $.load from
 			//replacing $("#" + module.parentId) content on every call
 			$('<div>').load(path + ".html", function() {
-				$("#" + module.parentId).append($(this).html());
+				$("#" + module.id).append($(this).html());
 				callback();
 			});		
 		},
@@ -22,8 +22,14 @@ define([ "jquery"], function($) {
 				if (path.indexOf("_end", path.length - 4) !== -1) {
 					htmlBuffer += data;
 				} else {
-					var oldHtml = $("#" + module.parentId).html();
-					htmlBuffer = data + oldHtml;
+					var oldHtml;
+					if (module.binding == "widget.widget") {
+						oldHtml = $("#" + module.id).html();
+						htmlBuffer += data + oldHtml;
+					} else {
+						oldHtml = htmlBuffer;
+						htmlBuffer = data + oldHtml;
+					}
 				}			
 				callback(htmlBuffer);
 			});		

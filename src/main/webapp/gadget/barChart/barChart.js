@@ -70,8 +70,6 @@ define(["jquery", "flot"], function(sandbox) {
 
 			console.log("bar chart initialized");
 			/* Bar chart ends */
-			
-			console.log("bar chart initialized");
 		},
 		destroy : function () {
 			console.log("bar chart destroyed");

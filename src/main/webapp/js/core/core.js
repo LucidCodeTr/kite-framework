@@ -6,11 +6,29 @@ define(
 			// private
 			var modules = {};
 			
-			var register = function(moduleID, parentId) {
+			var register = function(moduleId, parentId, binding) {
 				//console.log("Registering:" + moduleID + " " + parentId);
-				modules[moduleID] = {
-					"parentId" : parentId
+				modules[moduleId] = {
+					"id" : moduleId,
+					"parentId" : parentId,
+					"binding" : binding,
+					"visited" : false
 				};
+			};
+			
+			var registerAllContainers = function() {
+				
+				var selector = "[data-type='container']";
+				
+				//register all
+				$(selector).each(function(indx, el) {
+					register(
+							el.getAttribute("id"), 
+							$(el).parent().attr("id"),
+							el.getAttribute("data-bind")
+					);
+				});
+	
 			};
 
 			var loadGadgets = function(that, id) {
@@ -22,10 +40,13 @@ define(
 					selector = "[data-type='gadget']";
 				}
 				$(selector).each(function(indx, el) {
-					register(el.getAttribute("data-bind"), el
-									.getAttribute("id"));
-							it.startModule(el.getAttribute("data-bind"));
-						});
+					register(
+							el.getAttribute("id"), 
+							$(selector).attr("id"),
+							el.getAttribute("data-bind")
+					);
+					it.startModule(el.getAttribute("id"));
+				});
 			};
 
 			return {
@@ -38,64 +59,84 @@ define(
 					
 					var selector;
 					if (id) {
-						selector = "#" + id + " [data-type='container']"
+						selector = "#" + id;
 					} else {
 						id = page;
-						selector ="#page";
+						selector ="#container";
 					}
-				
-					if ($(selector)[0] != undefined) {
-						register($(selector)[0].getAttribute("data-bind"), $(selector)[0].getAttribute("id"));											
-						var module = modules[$(selector)[0].getAttribute("data-bind")];
-						
-						// Loads nested containers
-						that.loadContainers(that, module.parentId, htmlBuffer, function() {								
-							that.startContainer($(selector)[0].getAttribute("data-bind"), htmlBuffer, function(id, that, htmlBuffer) {
-																
-								console.log("container start loading complete: " + module.parentId);
-				
-								var path = "container/" + id.replace(/\./g, "/");
-								Loader.loadContainer(module, path + "_end", htmlBuffer, function(htmlBuffer) {
-									$("#" + module.parentId).html(htmlBuffer);
-									console.log("container end loading complete: " + module.parentId);
-
-									Loader.loadController(module, path, function(controller) {
 										
-											console.log("Container Started:" + module.parentId);
-											controller.display();
-											callback(that, module.parentId, function() {
-												loadGadgets(that);
-												
-											});										
-																		
-									});
-									
+					var module;
+					
+					//get unvisited child module if exists
+					$(selector).children("[data-type='container']").each(function(indx, el) {					
+						if (modules[el.getAttribute("id")].visited == false) {
+							module = modules[el.getAttribute("id")];
+							return false;
+						}
+					});
+
+					//if no unvisited child module exists, 
+					//1: load end of current container
+					//2: visit parent node
+					if (module == undefined) {						
+						module = modules[$(selector).attr("id")];
+						
+						//load start of current container
+						that.startContainer(module.id, htmlBuffer, function(id, that, htmlBuffer) {	
+							console.log("container start loading complete: " + module.id);
+							//loadGadgets(that, module.id);
+							var path = "container/" + module.binding.replace(/\./g, "/");
+							Loader.loadContainer(module.id, path + "_end", htmlBuffer, function(htmlBuffer) {
+								
+								console.log("container end loading complete: " + module.id);
+
+								Loader.loadController(module, path, function(controller) {
+								
+									console.log("Container Started:" + module.id);
+									controller.display();
+									if (module.parentId != "container") {
+										that.loadContainers(that, module.parentId, htmlBuffer, function() {
+											loadGadgets(that);
+										});
+									} else {
+										//end traversal
+										$("#" + module.parentId).html(htmlBuffer);
+										callback(that);
+									}																																						
 								});
-									
 							});
 						});
-					} else {
-						callback();
-					}			
+
+						
+					} else {	
+					//if an unvisited child exists
+						
+						//1: mark module as visited
+						module.visited = true;		
+							
+						//2: loads nested containers	
+						that.loadContainers(that, module.id, htmlBuffer);
+										
+					}		
 				},
 				
 				startModule : function(id) {
-					//console.log("Starting Module:" + id);
+					console.log("Starting Module:" + id);
 					if (!modules.hasOwnProperty(id)) {
 						throw "Module not found!";
 					}
 					var module = modules[id];
-					var path = "gadget/" + id.replace(/\./g, "/");
+					var path = "gadget/" + module.binding.replace(/\./g, "/");
 					var mdeps = [ path + ".js" ];
 					Loader.loadView(module, path, function() {
 
 						// Loads nested portlets
-						loadGadgets(this, module.parentId);
+						loadGadgets(this, module.id);
 					});
 					Loader.loadController(module, path, function(controller) {
 						controller.display();
 					});
-					//console.log("Modue Started:" + id);
+					console.log("Modue Started:" + id);
 				},
 				
 				startContainer : function(id, htmlBuffer, callback) {
@@ -103,12 +144,12 @@ define(
 					var self = this;
 					var module = modules[id];
 					
-					console.log("Starting Container:" + module.parentId);
+					console.log("Starting Container:" + module.id);
 					if (!modules.hasOwnProperty(id)) {
 						throw "Module not found!";
 					}
 					
-					var path = "container/" + id.replace(/\./g, "/");
+					var path = "container/" + module.binding.replace(/\./g, "/");
 					var mdeps = [ path + ".js" ];
 					Loader.loadContainer(module, path + "_start", htmlBuffer, function(htmlBuffer) {						
 						callback(id, self, htmlBuffer);						
@@ -130,6 +171,7 @@ define(
 				},
 				startAll : function(that) {
 					var htmlBuffer = "";
+					registerAllContainers();
 					this.loadContainers(this, undefined, htmlBuffer, function(that) {
 						loadGadgets(that);
 					});
