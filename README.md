@@ -1,7 +1,7 @@
 # Running the project locally
 
 ```
-$ cd ${BASE_DIRECTORY}/spring-mvc-demo
+$ cd ${BASE_DIRECTORY}/hisseoyunu-app
 $ mvn clean test jetty:stop jetty:run
 ```
 
@@ -14,7 +14,7 @@ Launch the project at http://localhost:8080/stock-analyzer/
 	* See: https://devcenter.heroku.com/articles/git#creating-a-heroku-remote
 
 ```
-$ cd ${BASE_DIRECTORY}/spring-mvc-demo
+$ cd ${BASE_DIRECTORY}/hisseoyunu-app
 $ git push heroku master
 ```
 
