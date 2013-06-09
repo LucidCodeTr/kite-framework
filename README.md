@@ -5,7 +5,7 @@ $ cd ${BASE_DIRECTORY}/hisseoyunu-app
 $ mvn clean test jetty:stop jetty:run
 ```
 
-Launch the project at http://localhost:8080/stock-analyzer/
+Launch the project at http://localhost:8080/hisseoyunu-app/
 
 # Deploying project on Heroku
 	
