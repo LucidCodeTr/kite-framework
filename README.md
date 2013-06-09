@@ -9,7 +9,9 @@ Launch the project at http://localhost:8080/stock-analyzer/
 
 # Deploying project on Heroku
 	
-	*Heroku Create (See: https://devcenter.heroku.com/articles/git#creating-a-heroku-remote)
+* Heroku Create 
+
+	* See: https://devcenter.heroku.com/articles/git#creating-a-heroku-remote
 
 ```
 $ cd ${BASE_DIRECTORY}/spring-mvc-demo
