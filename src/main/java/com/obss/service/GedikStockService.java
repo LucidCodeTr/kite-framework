@@ -1,17 +1,21 @@
 package com.obss.service;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import jodd.jerry.Jerry;
 import jodd.jerry.JerryFunction;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import com.obss.model.GedikStock;
 import com.obss.model.response.ResponseGedikStockList;
+import com.obss.model.response.ResponseStockPriceByPeriod;
 import com.obss.util.JerryUtils;
 
 /**
@@ -32,6 +36,8 @@ public class GedikStockService extends StockService<GedikStock> {
 	public static final String STOCK_LIST_FILE_NAME = "stockList.csv";
 
 	public static final String GEDIK_YATIRIM_MAIN_URL = "http://www.gedik.com/hisse/tum_hisse_fiyatlari.aspx";
+	
+	
 
 	public static int NR_OF_IMKB_STOCKS = 759;
 
@@ -109,4 +115,5 @@ public class GedikStockService extends StockService<GedikStock> {
 		});
 		return response;
 	}
+
 }

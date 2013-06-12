@@ -35,29 +35,30 @@ define(
 	
 			};
 
-			var loadGadgets = function(that, id) {
-				var it = that;
-				var selector;
-				if (id) {
-					selector = "#" + id + " [data-type='gadget']"
-				} else {
-					selector = "[data-type='gadget']";
-				}
-				$(selector).each(function(indx, el) {
-					register(
-							el.getAttribute("id"), 
-							$(selector).attr("id"),
-							el.getAttribute("data-bind")
-					);
-					it.startModule(el.getAttribute("id"));
-				});
-			};
-
 			return {
 				
 				Communication : Communication,
 				Utils : Utilities,
 				Loader : Loader,
+				
+
+				loadGadgets : function(that, id) {
+					var it = that;
+					var selector;
+					if (id) {
+						selector = "#" + id + " [data-type='gadget']"
+					} else {
+						selector = "[data-type='gadget']";
+					}
+					$(selector).each(function(indx, el) {
+						register(
+								el.getAttribute("id"), 
+								$(selector).attr("id"),
+								el.getAttribute("data-bind")
+						);
+						it.startModule(el.getAttribute("id"));
+					});
+				},
 				
 				loadContainers : function(that, id, callback) {
 					
@@ -92,16 +93,13 @@ define(
 							controller.init(module.id);
 							if (module.parentId != "container") {
 								that.loadContainers(that, module.parentId, function() {
-									loadGadgets(that);
+									that.loadGadgets(that);
 								});
 							} else {
 								//end traversal
 								callback(that);
 							}																																						
-						});
-						
-
-						
+						});											
 					} else {	
 					//if an unvisited child exists
 						
@@ -122,11 +120,6 @@ define(
 					var module = modules[id];
 					var path = "gadget/" + module.binding.replace(/\./g, "/");
 					var mdeps = [ path + ".js" ];
-					Loader.loadView(module, path, function() {
-
-						// Loads nested portlets
-						loadGadgets(this, module.id);
-					});
 					Loader.loadController(module, path, function(controller) {
 						controller.init(module.id);
 					});
@@ -145,10 +138,11 @@ define(
 						el.removeChild(el.lastChild);
 					}
 				},
-				startAll : function(that) {
+				startAll : function(that, callback) {
 					registerAllContainers();
 					this.loadContainers(this, undefined, function(that) {
 						loadGadgets(that);
+						callback();
 					});
 					
 				},

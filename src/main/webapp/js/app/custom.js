@@ -5,7 +5,6 @@ define(
 		[ "jquery", "prettyPhoto", "bootstrap-datetimepicker", 'flot'],
 		function() {
 
-
 				$(window).resize(function() {
 					if ($(window).width() >= 765) {
 						$(".sidebar .sidebar-inner").slideDown(350);

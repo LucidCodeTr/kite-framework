@@ -1,78 +1,108 @@
-define(["jquery", "flot", "flot.resize"], function(sandbox) {
+define(["core/sandbox", "mustache", "flot", "flot.resize", "flot.time"], function(sandbox, mustache) {
+	
+	var midDay = function (inputTime) { 
+	    var rd = new Date(inputTime); 
+	    return new Date(rd.getFullYear(), rd.getMonth(), rd.getDate(), 12, 0, 0, 0); 
+	};
+	
+	var filterWeekend = function(value) { 
+	    // refDate = first monday since epoch (for date filtering) 
+	    var refDate = new Date(1970, 0, 5, 12, 0, 0, 0); 
+	    var inputDate = midDay(value); 
+	    // lastMonday = monday of the week of the input date 
+	    var lastMonday = midDay(value); 
+	    lastMonday.setUTCDate(lastMonday.getUTCDate() - (lastMonday.getUTCDay() % 7 - 1)); 
+	    // numInweek = the number of days of input date since previous monday 
+	    var numInWeek = inputDate.getDay() - 1; 
+	    // totalDays = the number of days since jan 5, 1970 (the first 
+	    //monday after epoch) until last monday 
+	    var totalDays = (lastMonday.getTime() - refDate.getTime()) / (24 * 60 * 60 * 1000); 
+	    // total weekdays = 5/7 * total days + numInweek reduced to friday 
+	    //in case of weekend days 
+	    var totalWeekDays = Math.floor(5 / 7 * totalDays) + Math.min(4, numInWeek); 
+	    return totalWeekDays; 
+	};
+	
 	return {
+		dom : {
+			self : null
+		},
+		data : {
+			id : null,
+			loadUrl : "ajax/listPriceByPeriod",
+			loadData : {
+				stockName : "BIMAS",
+				period : "WEEK"
+			}
+		
+		},
+		template : 
+            '<div id="{{id}}" class="bar-chart" style="padding: 0px; position: relative;"\n' + 
+            '</div>'
+		, 
+    	loadTemplate : function() {
+    		var output = mustache.render(this.template, this.data);
+    		this.dom.self.replaceWith(output);
+    	},
+    	load : function(url, loadData) {
+    		var that = this;
+    		$.ajax({
+	            url: this.data.loadUrl,
+	            data: loadData,
+	            method: 'GET',
+	            dataType: 'json',
+	            success: function(data) {
+	            	that.plot(data, that.data.id);
+	            }
+	        });
+    	},
+    	plot : function(data, id) {	
+			
+    		//format data				
+			var d1 = [];			
+			for(var i = 0; i < data.length; i ++) {
+				d1.push([data[i][0], data[i][1]]);
+			}
+			
+			$.plot($("#" + id), [d1], {					
+				xaxis: {
+				      mode: "time",
+				      //transform: filterWeekend
+				},
+				grid : {
+					borderWidth : 0,
+					color : "#777"
+				},
+				colors : [ "#52b9e9"],
+				bars : {
+					show : true,
+					lineWidth : 15,
+					fill : true
+				}
+			});			
+    	},
 		init : function (id) {
 			
-			/* Bar Chart starts */
-
-			var d1 = [];
+			//set dom elements
+			this.dom.self = $("#" + id);
 			
-			for ( var i = 0; i <= 30; i += 1)
-				d1.push([i, parseInt(Math.random() * 30) ]);
+			//set data
+			this.data.id = id;
 			
-			var d2 = [];
-			for ( var i = 0; i <= 30; i += 1)
-				d2.push([i, parseInt(Math.random() * 30) ]);
-
-			var stack = 0, bars = true, lines = false, steps = false;
-
-			function plotWithOptions() {
-				$.plot($("#bar-chart"), [ d1, d2 ], {
-					series : {
-						stack : stack,
-						lines : {
-							show : lines,
-							fill : true,
-							steps : steps
-						},
-						bars : {
-							show : bars,
-							barWidth : 0.8
-						}
-					},
-					grid : {
-						borderWidth : 0,
-						hoverable : true,
-						color : "#777"
-					},
-					colors : [ "#52b9e9", "#0aa4eb" ],
-					bars : {
-						show : true,
-						lineWidth : 0,
-						fill : true,
-						fillColor : {
-							colors : [ {
-								opacity : 0.9
-							}, {
-								opacity : 0.8
-							} ]
-						}
-					}
-				});
+			//load html template
+			this.loadTemplate();
+			
+			//load data if url exists
+			if (this.data.loadUrl != null) {
+				this.load(this.data.loadUrl, this.data.loadData);
 			}
 
-			plotWithOptions();
-
-			$(".stackControls input")
-					.click(
-							function(e) {
-								e.preventDefault();
-								stack = $(this).val() == "With stacking" ? true : null;
-								plotWithOptions();
-							});
-			$(".graphControls input").click(
-					function(e) {
-						e.preventDefault();
-						bars = $(this).val().indexOf("Bars") != -1;
-						lines = $(this).val().indexOf("Lines") != -1;
-						steps = $(this).val().indexOf("steps") != -1;
-						plotWithOptions();
-					});
-
 			console.log("bar chart initialized");
-			/* Bar chart ends */
+
 		},
 		destroy : function () {
 			console.log("bar chart destroyed");
-		}
+		},
+		
 	}
 });

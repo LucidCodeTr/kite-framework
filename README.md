@@ -1,21 +1,22 @@
-This is an example project demonstrating the basics of Spring MVC, Hibernate and Mustache Templates.
-
-# Getting started
-
-* Fork this project
-* Update your running MySql Databse with the SQL script provided under src/webapp/resources/sql
-
-# Running the project
+# Running the project locally
 
 ```
 $ cd ${BASE_DIRECTORY}/spring-mvc-demo
 $ mvn clean test jetty:stop jetty:run
 ```
 
-Launch the project at http://localhost:8080/spring-mvc-demo/
+Launch the project at http://localhost:8080/stock-analyzer/
+
+# Deploying project on Heroku
+	
+	*Heroku Create (See: https://devcenter.heroku.com/articles/git#creating-a-heroku-remote)
+
+```
+$ cd ${BASE_DIRECTORY}/spring-mvc-demo
+$ git push heroku master
+```
 
 # Feature Highlights
-
 
 * File Structure
 
@@ -26,7 +27,6 @@ Launch the project at http://localhost:8080/spring-mvc-demo/
 	* src/test/* for tests
 	* src/main/webapp for static web resources (css, html, img, js)
 
-
 * Spring MVC
 
 	* Annotation Based Configuration
@@ -35,15 +35,13 @@ Launch the project at http://localhost:8080/spring-mvc-demo/
 	* Mock HttpServletResponse & Response for Integration Testing
 	* SpringJUnit4ClassRunner for utilizing annotations during testing
 
-
 * Hibernate
 
 	* ORM Mapping
 	* Model Validation
 	* Transaction Management
 	* Data-access-level pagination
-	
-	
+		
 * Maven
 
 	* Project Object Model (POM) Configuration
@@ -51,12 +49,9 @@ Launch the project at http://localhost:8080/spring-mvc-demo/
 	* Utilization of jetty-maven-plugin
 	* Single line of command (clean test jetty:stop jetty:run) to clean, test, build and deploy
 
-
 * Testing
 
-
-* JUnit and EasyMock for testing
-
+	* JUnit and EasyMock for testing
 
 * Front-End
 
@@ -65,13 +60,13 @@ Launch the project at http://localhost:8080/spring-mvc-demo/
 	* Bootstrap for front-end styling and modal popUp actions
 	* Namespacing pattern adopted for JavaScript
 	
-	
 * Database Management
+
 	* MySQL
 	
-	
 * Version Control
-	* Git
+
+	* Bitbucket - Heroku
 	
 	
 * Other libraries used:

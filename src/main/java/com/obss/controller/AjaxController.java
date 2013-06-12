@@ -1,11 +1,13 @@
 package com.obss.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ import com.obss.model.response.ResponseAccountList;
 import com.obss.model.response.ResponseGedikStockList;
 import com.obss.service.AccountService;
 import com.obss.service.GedikStockService;
+import com.obss.service.MyNetFinansService;
+import com.obss.service.MyNetFinansService.PERIOD;
 import com.octo.captcha.service.image.ImageCaptchaService;
 
 /**
@@ -51,7 +55,13 @@ public class AjaxController {
 	public void setGedikStockService(GedikStockService gedikStockService) {
 		this.gedikStockService = gedikStockService;
 	}
+	
+	@Autowired
+	private MyNetFinansService myNetFinansService;
 
+	public void setMyNetFinansService(MyNetFinansService myNetFinansService) {
+		this.myNetFinansService = myNetFinansService;
+	}
 
 	/**
 	 * Handles request for saving / updating account
@@ -182,4 +192,22 @@ public class AjaxController {
 		return gedikStockList;
 
 	}
+	
+	/**
+	 * Handles request for listing accounts
+	 */
+	@RequestMapping(value = "/listPriceByPeriod", method = RequestMethod.GET)
+	
+	public @ResponseBody
+	JsonNode listPriceByPeriod(
+			@RequestParam(value = "stockName", required = true) String stockName,
+			@RequestParam(value = "period", required = true) PERIOD period) {
+		logger.debug("Received request to list gedik stocks");
+		
+		JsonNode priceList = myNetFinansService.getPricesByPeriod(stockName, period);
+		
+		return priceList;
+
+	}
+
 }
