@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.obss.config.DaoConfiguration;
-import com.obss.config.ServiceConfiguration;
-import com.obss.dao.AccountDao;
-import com.obss.model.Account;
-import com.obss.model.response.ResponseAccount;
+import tr.com.lucidcode.config.DaoConfiguration;
+import tr.com.lucidcode.config.ServiceConfiguration;
+import tr.com.lucidcode.dao.AccountDao;
+import tr.com.lucidcode.model.Account;
+import tr.com.lucidcode.model.response.ResponseAccount;
+import tr.com.lucidcode.obss.service.AccountService;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ServiceConfiguration.class, DaoConfiguration.class})

@@ -17,12 +17,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 
-import com.obss.config.CaptchaConfiguration;
-import com.obss.config.DaoConfiguration;
-import com.obss.config.ServiceConfiguration;
-import com.obss.controller.AjaxController;
-import com.obss.model.Account;
-import com.obss.service.AccountService;
+import tr.com.lucidcode.config.CaptchaConfiguration;
+import tr.com.lucidcode.config.DaoConfiguration;
+import tr.com.lucidcode.config.ServiceConfiguration;
+import tr.com.lucidcode.controller.AjaxController;
+import tr.com.lucidcode.model.Account;
+import tr.com.lucidcode.obss.service.AccountService;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ServiceConfiguration.class,

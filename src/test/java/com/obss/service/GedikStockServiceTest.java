@@ -10,7 +10,9 @@ import jodd.jerry.Jerry;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.obss.util.JerryUtils;
+import tr.com.lucidcode.obss.service.GedikStockService;
+import tr.com.lucidcode.obss.util.JerryUtils;
+
 
 public class GedikStockServiceTest {
 	

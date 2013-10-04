@@ -12,6 +12,8 @@ import javax.validation.ValidatorFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tr.com.lucidcode.model.Account;
+
 public class AccountTest {
 	
 	private static final String INCORRECT_PHONE_NUMBER = "111-222-33-3";
