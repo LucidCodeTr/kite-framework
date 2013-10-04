@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.obss</groupId>
-	<artifactId>stock-analyzer</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<groupId>tr.com.lucidcode</groupId>
+	<artifactId>kite-framework</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-	<name>stock analyzer</name>
-	<url>http://maven.apache.org</url>
+	<name>Kite Framework</name>
+	<url>http://www.lucidcide.com.tr</url>
 
 	<properties>
 
@@ -157,13 +157,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Jodd & Jerry -->
 		<dependency>
 			<groupId>org.jodd</groupId>
@@ -208,37 +201,31 @@
 	<!-- Build Configuration | | Use "jetty:stop jetty:run" to start the server. 
 		| -->
 	<build>
-		<finalName>stock-analyzer</finalName>
 
 		<plugins>
 
-			<!-- 
-			Jetty Runner for Heroku Helps executing with command: java $JAVA_OPTS 
-				"-jar target/dependency/jetty-runner.jar /-/-port $PORT target/*.war"
-			-->
+			<!-- zip static & dynamic files -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.3</version>
+				<inherited>true</inherited>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/descriptor-dynamic.xml</descriptor>
+						<descriptor>src/main/assembly/descriptor-static.xml</descriptor>
+					</descriptors>
+				</configuration>
 				<executions>
 					<execution>
+						<id>make-assembly</id>
 						<phase>package</phase>
 						<goals>
-							<goal>copy</goal>
+							<goal>single</goal>
 						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.mortbay.jetty</groupId>
-									<artifactId>jetty-runner</artifactId>
-									<version>8.1.10.v20130312</version>
-									<destFileName>jetty-runner.jar</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+
 
 			<!-- Skip tests -->
 			<plugin>
@@ -250,19 +237,8 @@
 				</configuration>
 			</plugin>
 
-			<!-- Local Jetty Runtime Use "jetty:stop jetty:run" to start the server. -->
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>${jettyPluginVersion}</version>
-				<configuration>
-					<stopPort>8080</stopPort>
-					<stopKey>foo</stopKey>
-					<excludes>src/main/resources/db/**</excludes>
-				</configuration>
-			</plugin>
 		</plugins>
-		
+
 		<resources>
 			<resource>
 				<directory>src/main/webapp</directory>
@@ -271,7 +247,8 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<targetPath>${project.build.directory}/work</targetPath>
-			</resource>	
+			</resource>
 		</resources>
 	</build>
+
 </project>
