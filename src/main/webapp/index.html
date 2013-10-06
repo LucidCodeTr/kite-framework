@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <!-- Title and other stuffs -->
-<title>Dashboard - Metro King</title>
+<title>{{name}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Require JS -->
@@ -70,24 +70,6 @@
 
 				<!-- Row 1 -->
 				<div id="row_1" data-type="container" data-bind="row.row">
-					<div id="span_1" data-type="container" data-bind="span.span">
-						<div id="widget_1" data-type="container" data-bind="widget.widget" data-color="lightblue">
-							<aside id="chart1" data-type="gadget" data-bind="bar-chart.bar-chart"></aside>
-							<!-- <aside id="curveChart" data-type="gadget" data-bind="curveChart.curveChart"></aside>-->
-						</div>
-						<div id="widget_2" data-type="container" data-bind="widget.widget" data-color="green">
-							<aside id="kendo-grid" data-type="gadget" data-bind="kendo.grid.kendo-grid"></aside>
-							<!-- <aside id="curveChart" data-type="gadget" data-bind="curveChart.curveChart"></aside>-->
-						</div>
-					</div>
-					<div id="span_2" data-type="container" data-bind="span.span">
-						<div id="widget_3" data-type="container" data-bind="widget.widget">
-							<!--  <aside id="curveChart" data-type="gadget" data-bind="curveChart.curveChart"></aside>
-						-->
-						</div>
-						<div id="widget_4" data-type="container" data-bind="widget.widget">
-						</div>
-					</div>
 
 				</div>
 				<!-- Row 1 ends -->
@@ -114,4 +96,7 @@
 		href="http://wbpreview.com/previews/WB0GRG7H2/#"><i
 			class="icon-chevron-up"></i></a></span>
 </body>
+<script type="text/javascript">
+requirejs([ "../code/{{functionalArea}}/{{name}}"]);
+</script>
 </html>

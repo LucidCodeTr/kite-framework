@@ -6,7 +6,10 @@ define(["jquery", "mustache"], function(sandbox, mustache) {
 		},
 		data : {
 			id : null,
-			innerHtml : null
+			name : null,
+			innerHtml : null,
+			functionalArea : null
+			
 		},
 		template : 
             '<div id ="{{id}}">\n' + 
@@ -52,9 +55,12 @@ define(["jquery", "mustache"], function(sandbox, mustache) {
 			//set data
 			this.data.id = id;		
 			this.data.innerHtml = this.dom.self.html();
+			this.data.functionalArea = this.dom.self.attr("data-func-area");
+			this.data.name = this.dom.self.attr("data-name");
 			
 			//draw widget
 			this.paint();
+
 			console.log("page display executed");
 		},
 		destroy : function () {

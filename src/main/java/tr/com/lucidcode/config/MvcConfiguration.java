@@ -9,7 +9,8 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.mustache.MustacheTemplateLoader;
+import org.springframework.web.servlet.view.mustache.MustacheViewResolver;
 
 @Configuration
 @EnableWebMvc
@@ -17,18 +18,21 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	
 	protected static Logger logger = Logger.getLogger("sessionListener");
+	
+    @Bean
+    public ViewResolver getViewResolver(ResourceLoader resourceLoader) {
+        MustacheViewResolver mustacheViewResolver = new MustacheViewResolver();
+        mustacheViewResolver.setPrefix("/");
+        mustacheViewResolver.setSuffix(".html");
+        mustacheViewResolver.setCache(false);
+        mustacheViewResolver.setContentType("text/html;charset=utf-8");
 
-	@Bean
-	public ViewResolver getViewResolver(ResourceLoader resourceLoader) {
-		
-		InternalResourceViewResolver InternalResolver = new InternalResourceViewResolver();
-		InternalResolver.setPrefix("/");
-		InternalResolver.setSuffix(".html");
-		InternalResolver.setCache(false);
-		InternalResolver.setContentType("text/html;charset=ISO-8859-1");
+        MustacheTemplateLoader mustacheTemplateLoader = new MustacheTemplateLoader();
+        mustacheTemplateLoader.setResourceLoader(resourceLoader);
 
-		return InternalResolver;
-	}
+        mustacheViewResolver.setTemplateLoader(mustacheTemplateLoader);
+        return mustacheViewResolver;
+    }
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

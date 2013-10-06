@@ -97,5 +97,4 @@ requirejs.config({
 require(["core/sandbox"], function(Sandbox) {
 	Sandbox.Core.Loader.loadCSS();
 })
-requirejs([ "app/main"]);
 
