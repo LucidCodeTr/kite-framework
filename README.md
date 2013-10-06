@@ -15,6 +15,15 @@ Launch the project at http://localhost:8080/{project-name}?f={functionalArea}&n=
 
 # Feature Highlights
 
+* Integrated Development Environment
+
+	* Accompanied with Eclipse Development Suite composed of:
+		* Project Wizard, 
+		* Page Wizard, 
+		* WYSIWYG Editor and 
+		* BPMN Editor.
+	* The framework itself is Open Sources and the IDE is propriety software.
+
 * File Structure
 
 	* Derived from maven-webapp archetype, the project file structure is defined by kite-archetype as below:
