@@ -17,7 +17,7 @@ Launch the project at http://localhost:8080/{project-name}?f={functionalArea}&n=
 
 * File Structure
 
-	* Derived from maven-webapp archetype, the project file is 
+	* Derived from maven-webapp archetype, the project file
 	* structure is defined by kite-archetype as below:
 	
 	* src/main/java for Java Sources
@@ -46,8 +46,8 @@ Launch the project at http://localhost:8080/{project-name}?f={functionalArea}&n=
 	* New application template is provided with Kite Archetype
 	* Project Object Model (POM) Configuration
 	* Parent Project (kite-base) controls over child app modules,
-	which depend on seperate kite-framework package whose version 
-	is determined by kite-base
+	+ which depend on seperate kite-framework package whose version 
+	+ is determined by kite-base
 	* Platform independent resource & compilation encoding
 	* Utilization of jetty-maven-plugin
 	* Single line of command (clean test jetty:stop jetty:run) to clean, test, build and deploy
