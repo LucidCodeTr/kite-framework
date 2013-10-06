@@ -59,10 +59,9 @@ Launch the project at http://localhost:8080/{project-name}?f={functionalArea}&n=
 	* jQuery for DOM Manipulation
 	* Bootstrap for front-end styling and modal popUp actions
 	* Namespacing pattern adopted for JavaScript
-	* Implementation of Nicholas Zakas' Scalable JavaScript Application
-	  Architecture
+	* Implementation of Nicholas Zakas' Scalable JavaScript Application Architecture
 	* Client Side JavaScript Front-End Coding opposed to Server Side Java Front-End Coding
-	*Rresponsive Design by responsive.js
+	* Responsive Design by responsive.js
 	* Sophisticated JavaScript Library Dependency Management by require.js
 	
 * Database Management
