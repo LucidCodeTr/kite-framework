@@ -15,7 +15,7 @@ import org.hibernate.exception.DataException;
 import org.springframework.stereotype.Service;
 
 import tr.com.lucidcode.model.Account;
-import tr.com.lucidcode.obss.util.HibernateUtil;
+import tr.com.lucidcode.util.HibernateUtil;
 
 
 @SuppressWarnings("unchecked")

@@ -7,7 +7,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.exception.DataException;
 import org.springframework.stereotype.Service;
 
-import tr.com.lucidcode.obss.util.HibernateUtil;
+import tr.com.lucidcode.util.HibernateUtil;
 
 
 @Service("baseDao")

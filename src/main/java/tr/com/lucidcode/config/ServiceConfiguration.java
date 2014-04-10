@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import tr.com.lucidcode.obss.service.AccountService;
-import tr.com.lucidcode.obss.service.GedikStockService;
+import tr.com.lucidcode.service.AccountService;
+import tr.com.lucidcode.service.GedikStockService;
 
 
 @Configuration

@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import tr.com.lucidcode.obss.util.HibernateUtil;
+import tr.com.lucidcode.util.HibernateUtil;
 
 
 @Configuration

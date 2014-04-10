@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import tr.com.lucidcode.model.response.ResponseGedikStockList;
-import tr.com.lucidcode.obss.service.GedikStockService;
+import tr.com.lucidcode.service.GedikStockService;
 
 
 @Controller

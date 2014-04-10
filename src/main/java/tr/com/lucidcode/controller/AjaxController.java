@@ -19,10 +19,10 @@ import tr.com.lucidcode.model.Account;
 import tr.com.lucidcode.model.response.ResponseAccount;
 import tr.com.lucidcode.model.response.ResponseAccountList;
 import tr.com.lucidcode.model.response.ResponseGedikStockList;
-import tr.com.lucidcode.obss.service.AccountService;
-import tr.com.lucidcode.obss.service.GedikStockService;
-import tr.com.lucidcode.obss.service.MyNetFinansService;
-import tr.com.lucidcode.obss.service.MyNetFinansService.PERIOD;
+import tr.com.lucidcode.service.AccountService;
+import tr.com.lucidcode.service.GedikStockService;
+import tr.com.lucidcode.service.MyNetFinansService;
+import tr.com.lucidcode.service.MyNetFinansService.PERIOD;
 
 import com.octo.captcha.service.image.ImageCaptchaService;
 
