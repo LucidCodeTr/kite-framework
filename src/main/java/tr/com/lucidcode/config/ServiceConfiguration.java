@@ -9,7 +9,7 @@ import tr.com.lucidcode.service.GedikStockService;
 
 
 @Configuration
-@ComponentScan("com.obss.service")
+@ComponentScan("tr.com.lucidcode.service")
 public class ServiceConfiguration {
 	
 	@Bean

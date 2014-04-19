@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.mustache.MustacheViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.obss")
+@ComponentScan("tr.com.lucidcode")
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	
 	protected static Logger logger = Logger.getLogger("sessionListener");

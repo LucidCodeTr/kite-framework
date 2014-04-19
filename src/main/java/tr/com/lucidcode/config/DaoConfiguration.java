@@ -8,7 +8,7 @@ import tr.com.lucidcode.dao.AccountDao;
 
 
 @Configuration
-@ComponentScan("com.obss.dao")
+@ComponentScan("tr.com.lucidcode.dao")
 public class DaoConfiguration {
 	
 	@Bean
