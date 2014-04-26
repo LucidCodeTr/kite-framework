@@ -1,4 +1,14 @@
+/**
+ * Project Object Model (POM) object defines Content Delivery Networks (CDN's)
+ * and local paths of required JavaScipt (JS) libraries and Cascading Style
+ * Sheet (CSS) documents. It also manages versions of required JS libraries and
+ * CSS files.
+ * 
+ * @see {@link http://requirejs.org/docs/api.html#config} for further
+ *      information
+ */
 var pom = {
+		
 	repos : {
 		'google' : '//ajax.googleapis.com/ajax/libs',
 		'bootstrapcdn' : '//netdna.bootstrapcdn.com',
@@ -19,7 +29,7 @@ var pom = {
 	},
 	cssDependencies :  {
 		
-		//css delivered via cdn		
+		// css delivered via cdn
 		'bootstrap' : '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css',
 		'bootstrap-datetimepicker' : '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/0.0.11/css/bootstrap-datetimepicker.min.css',
 		'bootstrap-responsive' : '//cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap-responsive.css',
@@ -28,7 +38,7 @@ var pom = {
 		'fullcalendar' : '//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.1/fullcalendar.css',
 		'prettyphoto' : '//cdn.jsdelivr.net/prettyphoto/3.1.5/css/prettyPhoto.css',
 		
-		//stored css
+		// stored css
 		'rateit' : 'css/rateit.css',
 		'gritter' : 'css/jquery.gritter.css',
 		'cleditor' : 'css/jquery.cleditor.css',
@@ -40,8 +50,20 @@ var pom = {
 	}
 }
 
+/**
+ * Project Object Model (POM) object defines Content Delivery Networks (CDN's)
+ * and local paths of required JavaScrõpt (JS) libraries and Cascading Style
+ * Sheet (CSS) documents. It also manages versions of required JS libraries and
+ * CSS files.
+ */
 requirejs.config({
-	//transitive dependencies
+	
+    /**
+	 * @cfg {String} shim (optional) Configure the dependencies, exports, and
+	 *      custom initialization for older, traditional "browser globals"
+	 *      scripts that do not use define() to declare the dependencies and set
+	 *      a module value.
+	 */
 	shim: {
 		'sparkline' : ['jquery'],
 		'sizzle' : ['jquery'],
@@ -65,7 +87,19 @@ requirejs.config({
         'mustache' : [],
         
     },
+    
+    /**
+	 * @cfg {String} baseUrl (required) The root path to use for all module
+	 *      lookups.
+	 */
 	"baseUrl" : "js",
+	
+    /**
+	 * @cfg {String} paths (required) Path mappings for module names not found
+	 *      directly under baseUrl. The path settings are assumed to be relative
+	 *      to baseUrl, unless the paths setting starts with a "/" or has a URL
+	 *      protocol in it ("like http:").
+	 */
 	"paths" : {
 		"lib" : "lib",
 		"app" : "app",
@@ -88,13 +122,18 @@ requirejs.config({
 		"color" : pom.repos.cloudfare + "/jquery-color/" + pom.versions.jquerycolor + "/jquery.color.min",
 		"prettyPhoto" : pom.repos.jsdelivr + "/prettyphoto/" + pom.versions.prettyphoto + "/jquery.prettyPhoto",
 		"kendo-web" : "lib/kendo.web",
-		//"jquery" : "lib/offline/jquery.min",
+		// "jquery" : "lib/offline/jquery.min",
 		"mustache" : "lib/offline/mustache"
 	}
 });
 
 // Load the main app module to start the app
-require(["core/sandbox"], function(Sandbox) {
+require(["core/sandbox"], 
+		// This function will be called when all the dependencies
+        // listed above in deps are loaded. Note that this
+        // function could be called before the page is loaded.
+        // This callback is optional.
+		function(Sandbox) {
 	Sandbox.Core.Loader.loadCSS();
 })
 
