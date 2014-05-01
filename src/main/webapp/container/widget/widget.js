@@ -40,9 +40,6 @@ define(["core/sandbox", "mustache"], function(Sandbox, mustache) {
 			
 			this.dom.self = $("#" + id);
 			
-			//draw widget
-			this.paint();
-			
 			//set dom elements
 			this.dom.parent = this.dom.self.parent();
 			this.dom.minimizeButton = $("#" + id + "-wminimize");
@@ -52,6 +49,9 @@ define(["core/sandbox", "mustache"], function(Sandbox, mustache) {
 			this.data.id = id;		
 			this.data.innerHtml = this.dom.self.html();
 			this.data.color = this.dom.self.attr("data-color");
+						
+			//draw widget
+			this.paint();
 						
 			//bind events
 			this.bindEvents();
