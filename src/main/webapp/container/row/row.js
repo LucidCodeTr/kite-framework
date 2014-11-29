@@ -6,10 +6,11 @@ define(["jquery", "mustache"], function(sandbox, mustache) {
 		},
 		data : {
 			id : null,
-			innerHtml : null
+			innerHtml : null,
+			height : 1
 		},
 		template : 
-            '<div id ="{{id}}" class="row-fluid">\n' + 
+            '<div id ="{{id}}" class="row_{{height}}">\n' + 
 			'{{{innerHtml}}}\n' + 
             '</div>'
 		, 
@@ -25,6 +26,7 @@ define(["jquery", "mustache"], function(sandbox, mustache) {
 			//set data
 			this.data.id = id;		
 			this.data.innerHtml = this.dom.self.html();
+			this.data.height = this.dom.self.attr("data-height");
 			
 			//draw widget
 			this.paint();

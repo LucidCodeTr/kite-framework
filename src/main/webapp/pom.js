@@ -43,6 +43,7 @@ var pom = {
 		'gritter' : 'css/jquery.gritter.css',
 		'cleditor' : 'css/jquery.cleditor.css',
 		'style' : 'css/style.css',
+		'grid' : 'css/grid.css',
 		'widgets' : 'css/widgets.css',
 		'bootstrap-switch' : 'css/bootstrap-switch.css',
 		'kendo-common' : 'css/kendo.common.min.css',
@@ -52,7 +53,7 @@ var pom = {
 
 /**
  * Project Object Model (POM) object defines Content Delivery Networks (CDN's)
- * and local paths of required JavaScrõpt (JS) libraries and Cascading Style
+ * and local paths of required JavaScrï¿½pt (JS) libraries and Cascading Style
  * Sheet (CSS) documents. It also manages versions of required JS libraries and
  * CSS files.
  */

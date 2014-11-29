@@ -1,0 +1,122 @@
+/*
+	Variable column System.
+	Learn more ~ http://www.spry-soft.com/columns/
+	Based on 960 column System - http://960.gs/
+
+	Licensed under GPL and MIT.
+*/
+
+/*
+  Forces backgrounds to span full width,
+  even if there is horizontal scrolling.
+  Increase this if your layout is wider.
+
+  Note: IE6 works fine without this fix.
+*/
+
+body {
+  min-width: 1236px;
+}
+
+/* Containers
+----------------------------------------------------------------------------------------------------*/
+.container_12 {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1236px;
+}
+
+/* column >> Global
+----------------------------------------------------------------------------------------------------*/
+
+
+.column_1,
+.column_2,
+.column_3,
+.column_4,
+.column_5,
+.column_6,
+.column_7,
+.column_8,
+.column_9,
+.column_10,
+.column_11,
+.column_12 {
+	display:inline;
+	float: left;
+	position: relative;
+	margin-left: 1px;
+	margin-right: 0px;
+}
+
+/* column >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_12 .column_1 {
+	width:102px;
+}
+
+.container_12 .column_2 {
+	width:205px;
+}
+
+.container_12 .column_3 {
+	width:308px;
+}
+
+.container_12 .column_4 {
+	width:411px;
+}
+
+.container_12 .column_5 {
+	width:514px;
+}
+
+.container_12 .column_6 {
+	width:617px;
+}
+
+.container_12 .column_7 {
+	width:720px;
+}
+
+.container_12 .column_8 {
+	width:823px;
+}
+
+.container_12 .column_9 {
+	width:926px;
+}
+
+.container_12 .column_10 {
+	width:1029px;
+}
+
+.container_12 .column_11 {
+	width:1132px;
+}
+
+.container_12 .column_12 {
+	width:1235px;
+}
+
+/* row >> 4 rows
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_12 .row_1 {
+	height:100px;
+}
+
+.container_12 .row_2 {
+	height:200px;
+}
+
+.container_12 .row_3 {
+	height:300px;
+}
+
+.container_12 .row_4 {
+	height:400px;
+}

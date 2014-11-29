@@ -33,11 +33,18 @@ define(["core/sandbox", "mustache", "flot", "flot.resize", "flot.time"], functio
 			loadData : {
 				stockName : "BIMAS",
 				period : "WEEK"
-			}
+			},
+			height: 200,
+			width: 200,
+			top: 0,
+			left: 0
 		
 		},
 		template : 
-            '<div id="{{id}}" class="bar-chart" style="padding: 0px; position: relative;"\n' + 
+            '<div id="{{id}}" class="bar-chart" style="' + 
+			'padding: 0px; position: relative;' + 
+			'width: {{width}}px; height: {{height}}px;' + 
+			'top: {{top}}px; left: {{left}}px;"' + 
             '</div>'
 		, 
     	loadTemplate : function() {
@@ -89,6 +96,22 @@ define(["core/sandbox", "mustache", "flot", "flot.resize", "flot.time"], functio
 			//set data
 			this.data.id = id;
 			
+			//set size and position
+			if (this.dom.self.attr("data-width") != null) {
+				this.data.width = this.dom.self.attr("data-width");
+			}
+			if (this.dom.self.attr("data-height") != null) {
+				this.data.height = this.dom.self.attr("data-height");
+			}
+			
+			if (this.dom.self.attr("data-top") != null) {
+				this.data.top = this.dom.self.attr("data-top");
+			}
+			
+			if (this.dom.self.attr("data-left") != null) {
+				this.data.left = this.dom.self.attr("data-left");
+			}
+			
 			//load html template
 			this.loadTemplate();
 			
@@ -96,7 +119,7 @@ define(["core/sandbox", "mustache", "flot", "flot.resize", "flot.time"], functio
 			if (this.data.loadUrl != null) {
 				this.load(this.data.loadUrl, this.data.loadData);
 			}
-
+			
 			console.log("bar chart initialized");
 
 		},
