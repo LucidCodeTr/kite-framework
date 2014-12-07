@@ -86,8 +86,8 @@ define(
 					if (module == undefined) {						
 						module = modules[$(selector).attr("id")];
 
-						var path = "container/" + module.binding.replace(/\./g, "/");
-
+						var path = "container/" + module.binding + "/" + module.binding;
+						
 						Loader.loadController(module, path, function(controller) {								
 							console.log("Container Started:" + module.id);
 							controller.init(module.id);
